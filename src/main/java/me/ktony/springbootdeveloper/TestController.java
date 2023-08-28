@@ -13,7 +13,7 @@ public class TestController {
     TestService testService;
 
     @GetMapping("/test")
-    public List<Member> test() {
+    public List<Member> getAllMembers() {
         List<Member> members = testService.getAllMembers();
         return members;
     }
