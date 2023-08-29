@@ -1,3 +1,5 @@
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.*;
 
 public class JUnitCycleTest {
@@ -29,4 +31,9 @@ public class JUnitCycleTest {
     public void afterEach() {
         System.out.println("@AfterEach");
     }
+
+    @PersistenceContext
+    EntityManager em;
+
+
 }
