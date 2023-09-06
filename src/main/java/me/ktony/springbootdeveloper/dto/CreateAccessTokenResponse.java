@@ -8,6 +8,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateAccessTokenResponse {
 
-    private String refreshToken;
+    private String accessToken;
 
 }
