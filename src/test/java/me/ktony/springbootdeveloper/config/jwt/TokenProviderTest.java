@@ -24,10 +24,11 @@ public class TokenProviderTest {
     private TokenProvider tokenProvider;
 
     @Autowired
-    private UserRepository userRepository;
+    private JwtProperties jwtProperties;
 
     @Autowired
-    private JwtProperties jwtProperties;
+    private UserRepository userRepository;
+
 
     @DisplayName("generateToken(): 유저 정보와 만료 기간을 전달해 토큰을 만들 수 있다.")
     @Test
@@ -68,7 +69,7 @@ public class TokenProviderTest {
         assertThat(result).isFalse();
     }
 
-    @DisplayName("validToken(): 만료된 토큰인 때에 유효성 검증에 성공한다.")
+    @DisplayName("validToken(): 유효한 토큰인 때에 유효성 검증에 성공한다.")
     @Test
     void validaToken_validToken() {
         // given

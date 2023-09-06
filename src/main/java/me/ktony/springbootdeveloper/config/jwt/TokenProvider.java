@@ -24,6 +24,7 @@ public class TokenProvider {
 
     public String generateToken(User user, Duration expiredAt) {
         Date now = new Date();
+        //                          왜 expiredAt을 외부에서 주입해 주는걸까?
         return makeToken(new Date(now.getTime() + expiredAt.toMillis()), user);
     }
 
@@ -36,6 +37,7 @@ public class TokenProvider {
                 .setExpiration(expiry)
                 .claim("id", user.getId())
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
+                // URL-safe 하게 String으로 Serialization 하는 역할
                 .compact();
     }
 
@@ -52,7 +54,9 @@ public class TokenProvider {
 
     public Authentication getAuthentication(String token) {
         Claims claims = getClaims(token);
-        Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+        Set<SimpleGrantedAuthority> authorities =
+                // Collections.singleton() 단 한개의 객체만 저장하고 싶을때 사용
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new UsernamePasswordAuthenticationToken(
                 new org.springframework.security.core.userdetails.User(

@@ -28,6 +28,7 @@ public class JwtFactory {
         this.claims = claims != null ? claims : this.claims;
     }
 
+    // 파라미터가 없다면 기본 필드값들을 사용하여 JWT가 만들어진다
     public static JwtFactory withDefaultValues() {
         return JwtFactory.builder().build();
     }
